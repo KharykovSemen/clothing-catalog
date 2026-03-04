@@ -23,19 +23,19 @@
 - **SQLite3** - легковесная база данных для хранения товаров
 - **Dataclasses** - для структурированного представления данных
 
-## Установка и запуск
+## 🚀 Установка и запуск
 
-1.**Создайте виртуальное окружение**  
-python -m venv venv  
-source venv/bin/activate  # для Linux/Mac  
-или  
-venv\Scripts\activate  # для Windows  
-2.**Установите зависимости**  
-pip install -r requirements.txt  
-3.**Запустите приложение**  
-python app.py  
-4.**Откройте браузер и перейдите по адресу:**  
-http://localhost:8080  
+Для установки и запуска проекта выполните следующие шаги:
+
+1. Клонируйте репозиторий: git clone https://github.com/yourusername/clothing-store.git, затем перейдите в папку проекта: cd clothing-store
+
+2. Создайте виртуальное окружение: python -m venv venv, затем активируйте его: для Linux/Mac используйте source venv/bin/activate, для Windows — venv\Scripts\activate
+
+3. Установите зависимости: pip install -r requirements.txt
+
+4. Запустите приложение: python app.py
+
+5. Откройте браузер и перейдите по адресу: http://localhost:8080
 
 ## Скриншоты
 
