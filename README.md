@@ -23,33 +23,31 @@
 - **SQLite3** - легковесная база данных для хранения товаров
 - **Dataclasses** - для структурированного представления данных
 
-## 🚀 Установка и запуск
+## Установка и запуск
 
 Для установки и запуска проекта выполните следующие шаги:
 
-1. Клонируйте репозиторий: git clone https://github.com/yourusername/clothing-store.git, затем перейдите в папку проекта: cd clothing-store
+1. Создайте виртуальное окружение: python -m venv venv, затем активируйте его: для Linux/Mac используйте source venv/bin/activate, для Windows — venv\Scripts\activate
 
-2. Создайте виртуальное окружение: python -m venv venv, затем активируйте его: для Linux/Mac используйте source venv/bin/activate, для Windows — venv\Scripts\activate
+2. Установите зависимости: pip install -r requirements.txt
 
-3. Установите зависимости: pip install -r requirements.txt
+3. Запустите приложение: python app.py
 
-4. Запустите приложение: python app.py
-
-5. Откройте браузер и перейдите по адресу: http://localhost:8080
+4. Откройте браузер и перейдите по адресу: http://localhost:8080
 
 ## Скриншоты
 
-**Каталог товаров**
+### Каталог товаров
 <img width="1905" height="911" alt="image" src="https://github.com/user-attachments/assets/c923ab22-6397-4312-80a5-03ea0ed03b7c" />
 
-**Поиск по названию**
+### Поиск по названию
 <img width="1903" height="949" alt="image" src="https://github.com/user-attachments/assets/2408cc09-e9f9-4a99-a4dd-5acc21714696" />
 
-**Фильтрация**
+### Фильтрация
 <img width="1898" height="947" alt="image" src="https://github.com/user-attachments/assets/5558ed04-ec96-4601-bfa3-66ed518f9676" />
 
-**Пустая корзина**
+### Пустая корзина
 <img width="1898" height="872" alt="image" src="https://github.com/user-attachments/assets/9e32fac5-373d-4348-91a4-b3013d4191ae" />
 
-**Корзина покупок**
+### Корзина покупок
 <img width="1919" height="947" alt="image" src="https://github.com/user-attachments/assets/27b086fe-e07c-4093-9c17-99b554e4c8c8" />
