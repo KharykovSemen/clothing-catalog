@@ -27,13 +27,11 @@
 
 Для установки и запуска проекта выполните следующие шаги:
 
-1. Создайте виртуальное окружение: python -m venv venv, затем активируйте его: для Linux/Mac используйте source venv/bin/activate, для Windows — venv\Scripts\activate
+1. Установите зависимости: pip install -r requirements.txt
 
-2. Установите зависимости: pip install -r requirements.txt
+2. Запустите приложение: python app.py
 
-3. Запустите приложение: python app.py
-
-4. Откройте браузер и перейдите по адресу: http://localhost:8080
+3. Откройте браузер и перейдите по адресу: http://localhost:8080
 
 ## Скриншоты
 
