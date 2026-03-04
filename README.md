@@ -25,7 +25,7 @@
 
 ## Установка и запуск
 
-### Шаги по установке
+## Шаги по установке
 1.Создайте виртуальное окружение
 python -m venv venv
 source venv/bin/activate  # для Linux/Mac
@@ -38,7 +38,7 @@ python app.py
 4.Откройте браузер и перейдите по адресу:
 http://localhost:8080
 
-## Скриншоты
+##№ Скриншоты
 
 # Каталог товаров
 <img width="1905" height="911" alt="image" src="https://github.com/user-attachments/assets/c923ab22-6397-4312-80a5-03ea0ed03b7c" />
