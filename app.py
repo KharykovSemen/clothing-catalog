@@ -98,6 +98,14 @@ class Database:
             
             cursor = conn.execute(query, params)
             return [Product(**dict(row)) for row in cursor.fetchall()]
+    
+    def update_product_quantity(self, product_id: int, new_quantity: int):
+        """Обновляет количество товара на складе"""
+        with sqlite3.connect(self.db_file) as conn:
+            conn.execute(
+                "UPDATE products SET quantity = ? WHERE id = ?",
+                (new_quantity, product_id)
+            )
 
 
 class ClothingCatalog:
@@ -114,11 +122,26 @@ class ClothingCatalog:
                 
                 with ui.row().classes('gap-2'):
                     ui.button('Каталог', on_click=self._show_catalog, icon='store').props('flat')
-                    ui.button('Корзина', on_click=self._show_cart, icon='shopping_cart').props('flat')
+                    # Кнопка корзины с счетчиком
+                    self.cart_button = ui.button(
+                        'Корзина', 
+                        on_click=self._show_cart, 
+                        icon='shopping_cart'
+                    ).props('flat')
+                    self.cart_badge = ui.badge('0', color='red').props('floating')
         
         # Основной контент
         self.content = ui.column().classes('w-full p-4')
         self._show_catalog()
+    
+    def _update_cart_counter(self):
+        """Обновляет счетчик товаров в корзине"""
+        count = self.cart.count()
+        if count > 0:
+            self.cart_badge.set_text(str(count))
+            self.cart_badge.visible = True
+        else:
+            self.cart_badge.visible = False
     
     def _clear_content(self):
         self.content.clear()
@@ -206,7 +229,7 @@ class ClothingCatalog:
     
     def _create_product_card(self, product: Product):
         with ui.card().classes('w-full hover:shadow-lg transition-shadow'):
-            # Изображение (цветной фон с иконкой)
+            # Изображение 
             with ui.column().classes('w-full h-40 items-center justify-center rounded-t-lg').style(
                 f'background-color: {product.color or "#95a5a6"}'
             ):
@@ -234,11 +257,16 @@ class ClothingCatalog:
                     # Кнопка добавления в корзину
                     ui.button(
                         'В корзину', 
-                        on_click=lambda p=product: self.cart.add(p),
+                        on_click=lambda p=product: self._add_to_cart(p),
                         icon='add_shopping_cart'
                     ).props('outline').classes('mt-2')
                 else:
                     ui.badge('Нет в наличии', color='red')
+    
+    def _add_to_cart(self, product: Product):
+        """Добавляет товар в корзину и обновляет счетчик"""
+        self.cart.add(product)
+        self._update_cart_counter()
     
     def _highlight_text(self, text: str, search: str) -> str:
         """Подсвечивает совпадения при поиске"""
@@ -296,10 +324,12 @@ class ClothingCatalog:
     
     def _remove_from_cart(self, index: int):
         self.cart.remove(index)
+        self._update_cart_counter()
         self._show_cart()  # обновляем отображение корзины
     
     def _clear_cart(self):
         self.cart.clear()
+        self._update_cart_counter()
         self._show_cart()
     
     def _checkout(self):
@@ -307,8 +337,17 @@ class ClothingCatalog:
             ui.notify('Корзина пуста', type='warning')
             return
         
+        # Уменьшаем количество товаров на складе
+        for item in self.cart.items:
+            if item.id:  # Проверяем, что у товара есть ID
+                current_product = self.db.get_products(search=item.name)
+                if current_product and current_product[0].quantity >= 1:
+                    new_quantity = current_product[0].quantity - 1
+                    self.db.update_product_quantity(item.id, new_quantity)
+        
         total = self.cart.total()
         self.cart.clear()
+        self._update_cart_counter()
         ui.notify(f'Заказ оформлен! Сумма: {total:,.0f} ₽', type='positive')
         self._show_catalog()
 
